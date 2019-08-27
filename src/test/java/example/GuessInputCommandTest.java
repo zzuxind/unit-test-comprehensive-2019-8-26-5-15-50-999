@@ -1,12 +1,18 @@
 package example;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.io.IOException;
+import java.util.LinkedList;
 
 import org.junit.jupiter.api.Assertions;
 
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 
 import tw.GuessGame;
+import tw.commands.GuessInputCommand;
 
 
 public class GuessInputCommandTest {
@@ -15,7 +21,7 @@ public class GuessInputCommandTest {
 	
 	
 	 @Test
-	    public void should_verify_with_process_call_with_mockito() throws IOException {
+	    public void should_verify_with_guessGame_call() throws IOException {
 		 //given
 		 String inputString="2 3 4 5";
 		 
@@ -24,5 +30,15 @@ public class GuessInputCommandTest {
 		 Assertions.assertEquals("0A3B", resultString);
 
 	    }
+	 @Test
+	 public void should_verify_with_guessGame_call_with_mockito() throws IOException {
+		 GuessInputCommand guessInputCommand=Mockito.mock(GuessInputCommand.class);
+		 Mockito.when(guessInputCommand.input()).thenReturn("2 3 4 5");
+		 String resultString=GuessGame.guessGame(guessInputCommand.input(), "1 2 3 4");
+		 Assertions.assertEquals(resultString, "0A3B");
 		 
-	    }
+	 }
+		
+		 
+	
+}
